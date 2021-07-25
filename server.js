@@ -1,15 +1,8 @@
 const app = require('./app')
 
 //connect knex to the movies DB
-const knex = require("knex")({
-  client: "pg",
-  connection: {
-    host: "localhost",
-    user: "luislopez",
-    password: "",
-    database: "movies",
-  },
-});
+const connection = require('./knexfile')[process.env.NODE_ENV || 'development'];
+const db = require('knex')(connection);
 
 app.set('db', knex)
 
